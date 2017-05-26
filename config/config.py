@@ -18,5 +18,5 @@ fd.write("export PATH=$PATH:" + envPath + "/bin\n")
 fd.close()
 
 
-#sp.call(["ln","-s",envPath + "/bin/cs.sh",homePath + os.sep + targetPath + "/cs.sh"])
+sp.call(["ln","-s",envPath + "/etc/vimrc",homePath + "/.vimrc"])
 
