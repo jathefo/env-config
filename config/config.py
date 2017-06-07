@@ -7,7 +7,9 @@ import subprocess as sp
 
 homePath = os.environ['HOME']
 currPath = os.getcwd()
-envPath = os.path.dirname(currPath)
+envPath = homePath + os.sep + 'env-config' #os.path.dirname(currPath)
+print 'home path: ' + homePath
+print 'environ path: ' + envPath
 
 def isSubstring(str1, str2):
     tag = False
