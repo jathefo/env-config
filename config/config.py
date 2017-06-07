@@ -36,4 +36,4 @@ fd.close()
 if(not os.path.exists(homePath + os.sep + "/.vimrc")):
     sp.call(["ln","-s", envPath + "/etc/vimrc", homePath + "/.vimrc"])
 
-sp.call(["source " + homePath + os.sep + ".bashrc"], shell=True)
+sp.call([". " + homePath + os.sep + ".bashrc"], shell=True)
