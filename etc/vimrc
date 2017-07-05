@@ -184,14 +184,21 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 " \ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}
 " \ \|\ %{$USER}\ @\ %{hostname()}\
 
-" :inoremap [ []<Esc>i
-" :inoremap { {}<Esc>i
-" :inoremap < <><Esc>i
-" :inoremap " ""<Esc>i
-" :inoremap ' ''<Esc>i
+:imap [ []<Esc>i
+:imap { {}<Esc>i
+:imap ( ()<Esc>i
+:imap < <><Esc>i
+:imap " ""<Esc>i
+:imap ' ''<Esc>i
 
-" map <C-c> y
-" map <C-a> <Esc>ggVG
+:nmap w= :resize -3<CR>
+:nmap w- :resize +3<CR>
+:nmap w, :vertical resize +3<CR>
+:nmap w. :vertical resize -3<CR>
+
+" :map <C-c> y
+" :map <C-v> p
+:map <C-a> <Esc>ggVG
 "
 """""""""""""""""""""""cscope configuration""""""""""""""""""
 " set cscopequickfix=s-,c-,d-,i-,t-,e-if has("cscope")  
