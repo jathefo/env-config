@@ -10,9 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The plugin is used for highlight defferent words at the same time
-Plugin 'lfv89/vim-interestingwords'
-
 " An example for a vimrc file.
 "
 " Maintainer:    Bram Moolenaar <Bram@vim.org>
@@ -184,17 +181,23 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 " \ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}
 " \ \|\ %{$USER}\ @\ %{hostname()}\
 
-:imap [ []<Esc>i
-:imap { {}<Esc>i
-:imap ( ()<Esc>i
-:imap < <><Esc>i
-:imap " ""<Esc>i
-:imap ' ''<Esc>i
+:inoremap [ []<Esc>i
+:inoremap { {}<Esc>i
+:inoremap ( ()<Esc>i
+:inoremap < <><Esc>i
+:inoremap " ""<Esc>i
+:inoremap ' ''<Esc>i
 
-:nmap w= :resize -3<CR>
-:nmap w- :resize +3<CR>
-:nmap w, :vertical resize +3<CR>
-:nmap w. :vertical resize -3<CR>
+:nnoremap w= :resize -3<CR>
+:nnoremap w- :resize +3<CR>
+:nnoremap < :vertical resize +3<CR>
+:nnoremap > :vertical resize -3<CR>
+
+"split navigations
+:nnoremap <C-J> <C-W><C-J>
+:nnoremap <C-K> <C-W><C-K>
+:nnoremap <C-L> <C-W><C-L>
+:nnoremap <C-H> <C-W><C-H>
 
 " :map <C-c> y
 " :map <C-v> p
