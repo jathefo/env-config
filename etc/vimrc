@@ -188,10 +188,10 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :inoremap " ""<Esc>i
 :inoremap ' ''<Esc>i
 
-:nnoremap w= :resize -3<CR>
-:nnoremap w- :resize +3<CR>
-:nnoremap < :vertical resize +3<CR>
-:nnoremap > :vertical resize -3<CR>
+:nnoremap < :resize -3<CR>
+:nnoremap > :resize +3<CR>
+:nnoremap w= :vertical resize +30<CR>
+:nnoremap w- :vertical resize -30<CR>
 
 "split navigations
 :nnoremap <C-J> <C-W><C-J>

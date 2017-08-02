@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "repo init  -u smartisan:qualcomm/platform/manifest.git -b sanfrancisco -m $1 --repo-url smartisan:googlesource/git-repo --reference ~/src/android-mirror"
+repo init  -u smartisan:qualcomm/platform/manifest.git -b sanfrancisco -m $1 --repo-url smartisan:googlesource/git-repo --reference ~/src/android-mirror
