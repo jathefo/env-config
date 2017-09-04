@@ -111,7 +111,7 @@ endif
 
 " PLUGIN SETTINGS:
 " taglist.vim
-let g:Tlist_Ctags_Cmd='~/bin/ctags'
+let g:Tlist_Ctags_Cmd='~/env-config/bin/ctags'
 let g:Tlist_Auto_Update=1
 let g:Tlist_Process_File_Always=1
 let g:Tlist_Exit_OnlyWindow=1
