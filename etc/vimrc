@@ -199,9 +199,12 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :nnoremap <C-L> <C-W><C-L>
 :nnoremap <C-H> <C-W><C-H>
 
-" :map <C-c> y
-" :map <C-v> p
+:vmap <C-c> "+y
+:vmap <C-v> "+p
 :map <C-a> <Esc>ggVG
+
+:let mapleader='.'
+
 "
 """""""""""""""""""""""cscope configuration""""""""""""""""""
 " set cscopequickfix=s-,c-,d-,i-,t-,e-if has("cscope")  
@@ -224,6 +227,32 @@ if has("cscope")
      endif  
 endif
 
+" cscope keys map
+" :nmap <leader>sa:cs add cscope.out<cr>
+:nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+:nmap <leader>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+:nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+" :nmap <leader>s :cs find s <C-R><C-W><CR>
+
 " python code dictionary
 filetype plugin on
 let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
+
+" set match colors
+:hi blue ctermfg=0 ctermbg=6 guifg=Black guibg=#8CCBEA
+:hi green ctermfg=0 ctermbg=2 guifg=Black guibg=#A4E57E
+:hi red ctermfg=0 ctermbg=1 guifg=Black guibg=#FF7272
+:hi pink ctermfg=0 ctermbg=5 guifg=Black guibg=#FFB3FF
+
+:nmap mb :mat blue /<C-R><C-W>/<CR>
+:nmap mg :2mat green /<C-R><C-W>/<CR>
+:nmap mr :3mat red /<C-R><C-W>/<CR>
+:nmap cb :mat<CR>
+:nmap cg :2mat<CR>
+:nmap cr :3mat<CR>
