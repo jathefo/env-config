@@ -200,7 +200,7 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :nnoremap <C-H> <C-W><C-H>
 
 :vmap <C-c> "+y
-:vmap <C-v> "+p
+:nmap <C-p> "+p
 :map <C-a> <Esc>ggVG
 
 :let mapleader='.'
@@ -227,6 +227,10 @@ if has("cscope")
      endif  
 endif
 
+" ts
+:nmap f <C-]>
+:nmap tn <C-t>
+:nmap ts :ts <C-R>=expand("<cword>")<CR><CR>
 " cscope keys map
 " :nmap <leader>sa:cs add cscope.out<cr>
 :nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
