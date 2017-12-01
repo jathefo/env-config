@@ -137,7 +137,12 @@ set   nobackup
 set   cindent
 set   cinoptions=:0
 set   completeopt=longest,menuone
+
 set   cursorline
+highlight CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=NONE guifg=NONE
+" set   cursorcolumn
+" highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+
 set   encoding=utf-8
 set   fileencodings=utf-8,gb2312,gbk,gb18030,chinese
 set   fileformat=unix
@@ -170,7 +175,7 @@ set   nowrap
 set   autochdir
 
 set laststatus=2      " always show status line
-set ruler
+" set ruler
 highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 " get current path and translate $HOME to ~
 function! CurDir()
@@ -203,8 +208,6 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :nmap <C-p> "+p
 :map <C-a> <Esc>ggVG
 
-:let mapleader='.'
-
 "
 """""""""""""""""""""""cscope configuration""""""""""""""""""
 " set cscopequickfix=s-,c-,d-,i-,t-,e-if has("cscope")  
@@ -232,6 +235,7 @@ endif
 :nmap tn <C-t>
 :nmap ts :ts <C-R>=expand("<cword>")<CR><CR>
 " cscope keys map
+:let mapleader='.'
 " :nmap <leader>sa:cs add cscope.out<cr>
 :nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 :nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
