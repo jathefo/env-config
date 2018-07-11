@@ -8,8 +8,8 @@ import subprocess as sp
 homePath = os.environ['HOME']
 currPath = os.getcwd()
 envPath = homePath + os.sep + 'env-config' #os.path.dirname(currPath)
-print 'home path: ' + homePath
-print 'environ path: ' + envPath
+print('home path: ' + homePath)
+print('environ path: ' + envPath)
 
 def isSubstring(str1, str2):
     tag = False
@@ -22,13 +22,16 @@ def isSubstring(str1, str2):
 #    fd = open(homePath + os.sep + ".bashrc", "a")
 #    fd.write("export PATH=$PATH:~/" + targetPath)
 
-fd = open(homePath + os.sep + ".bashrc", "r+a")
+fd = open(homePath + os.sep + ".bashrc", "r")
 filelist = fd.readlines()
 idx = 0
 for fileline in filelist[::-1]:
     idx += 1
     if(isSubstring("env-config/bin", fileline)):
         break
+fd.close()
+
+fd = open(homePath + os.sep + ".bashrc", "a")
 if(idx == len(filelist)):
     fd.write("export PATH=$PATH:" + envPath + "/bin\n")
 fd.close()

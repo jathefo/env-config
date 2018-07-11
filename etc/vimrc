@@ -1,70 +1,155 @@
-" config vundle
-set nocompatible " be iMproved, required
-filetype off " required
+" ********************** vim bundle(vundle) begin ********************
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+
+" ++++++++++ add your plugins as below ++++++++++
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+"call vundle#begin('%HOME%/.vim/')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" An example for a vimrc file.
+"  " The following are examples of different formats supported.
+"  " Keep Plugin commands between vundle#begin/end.
+"  " plugin on GitHub repo
+"  Plugin 'tpope/vim-fugitive'
+"  " plugin from http://vim-scripts.org/vim/scripts.html
+"  " Plugin 'L9'
+"  " Git plugin not hosted on GitHub
+"  Plugin 'git://git.wincent.com/command-t.git'
+"  " git repos on your local machine (i.e. when working on your own plugin)
+"  Plugin 'file:///home/gmarik/path/to/plugin'
+"  " The sparkup vim script is in a subdirectory of this repo called vim.
+"  " Pass the path to set the runtimepath properly.
+"  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"  " Install L9 and avoid a Naming conflict if you've already installed a
+"  " different version somewhere else.
+"  " Plugin 'ascenator/L9', {'name': 'newL9'}
+
+Plugin 'jathefo/taglist.vim'
+" Plugin 'jathefo/cscope.vim'
+" Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()            " required
+" ++++++++++ add your plugins as above ++++++++++
+
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
-" Maintainer:    Bram Moolenaar <Bram@vim.org>
-" Last change:    2011 Apr 15
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"          for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"        for OpenVMS:  sys$login:.vimrc
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
+" ********************** vim bundle(vundle) end *********************
+
+" ******************** taglist configuration begin ******************
+" Configurations for taglist plugin. So you should install taglist plugin firstly.
+
+nmap  <F1> :TlistToggle<cr>
+
+let Tlist_Auto_Highlight_Tag = 1
+let Tlist_Auto_Open = 1
+let Tlist_Auto_Update = 1
+let Tlist_Close_On_Select = 0
+let Tlist_Compact_Format = 1
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+" Tlist_Display_Prototype       	Show prototypes and not tags in the taglist window.
+" Tlist_Display_Tag_Scope       	Show tag scope next to the tag name.
+" Tlist_Enable_Fold_Column	        Show the fold indicator column in the taglist window.
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_File_Fold_Auto_Close = 1
+" Tlist_GainFocus_On_ToggleOpen 	Jump to taglist window on open.
+" Tlist_Highlight_Tag_On_BufEnter 	On entering a buffer, automatically highlight the current tag.
+" Tlist_Inc_Winwidth'            	Increase the Vim window width to accommodate the taglist window.
+" Tlist_Max_Submenu_Items'       	Maximum number of items in a tags sub-menu.
+" Tlist_Max_Tag_Length'          	Maximum tag length used in a tag menu entry.
+let Tlist_Process_File_Always = 1
+" Tlist_Show_Menu'               	Display the tags menu.
+let Tlist_Show_One_File = 1
+" Tlist_Sort_Type'               	Sort method used for arranging the tags.
+" let Tlist_Use_Horiz_Window = 1
+let Tlist_Use_Right_Window = 0
+" Tlist_Use_SingleClick'         	Single click on a tag jumps to it.
+" let Tlist_WinHeight = 25
+let Tlist_WinWidth = 30
+
+" taglist command configuration
+set tags=tags;
+:nmap f <C-]>
+:nmap tn <C-t>
+:nmap ts :ts <C-R>=expand("<cword>")<CR><CR>
+
+" ******************** taglist configuration end ********************
+
+" ******************* cscope configuration begin ********************
+" set cscopequickfix=s-,c-,d-,i-,t-,e-
+if has("cscope")
+    " set csprg=/usr/bin/cscope
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    " set csto=0
+    " set cspc=3
+    " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
+    " set cscopetag
+    " show msg when any other cscope db added
+    " set cscopeverbose
+    "add any database in current dir
+    if filereadable("cscope.out")
+        cs add cscope.out
+    "else search cscope.out elsewhere
+    else
+       let cscope_file=findfile("cscope.out", ".;")
+       let cscope_pre=matchstr(cscope_file, ".*/")
+       if !empty(cscope_file) && filereadable(cscope_file)
+           exe "cs add" cscope_file cscope_pre
+       endif
+    endif
 endif
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
+" cscope command configuration
+:let mapleader='.'
+" :nmap <leader>sa:cs add cscope.out<cr>
+:nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+:nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+:nmap <leader>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+:nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+" ******************* cscope configuration end **********************
 
-" if has("vms")
-"   set nobackup        " do not keep a backup file, use versions instead
-" else
-"   set backup        " keep a backup file
-" endif
-set history=50        " keep 50 lines of command line history
-set ruler        " show the cursor position all the time
-set showcmd        " display incomplete commands
-set incsearch        " do incremental searching
+" ***************** show status line begin ****************
+set laststatus=2      " always show status line
+set ruler
+" get current path and translate $HOME to ~
+function! CurDir()
+    let curdir = substitute(getcwd(), $HOME, "~", "g")
+    return curdir
+endfunction
+set statusline=%1*\|\ %t%m%r%h\ \|
+set statusline+=%2*\ \pwd:%1.80{CurDir()}\ \|
+set statusline+=%3*\ %=\|
+set statusline+=%4*\ %l,%c\ %p%%\ %L\|
+hi User1 cterm=inverse,bold ctermfg=Brown ctermbg=Black
+hi User2 cterm=bold ctermfg=Black ctermbg=Brown
+hi User3 cterm=bold ctermfg=Black ctermbg=Cyan
+hi User4 cterm=bold ctermfg=Black ctermbg=Magenta
 
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
+" ***************** show status line end ******************
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
+" ***************** remember last pos begin ****************
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -98,93 +183,67 @@ else
   set autoindent        " always set autoindenting on
 
 endif " has("autocmd")
+" ***************** remember last pos end ****************
 
-" Convenient command to see the difference between the current buffer and the
-" file it was loaded from, thus the changes you made.
-" Only define it when not defined already.
-if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-          \ | wincmd p | diffthis
-endif
+" ******************* vi system config begin ************************
+set nocompatible
 
-" add by yemz 2015-02-09
-
-" PLUGIN SETTINGS:
-" taglist.vim
-let g:Tlist_Ctags_Cmd='~/env-config/bin/ctags'
-let g:Tlist_Auto_Update=1
-let g:Tlist_Process_File_Always=1
-let g:Tlist_Exit_OnlyWindow=1
-let g:Tlist_Show_One_File=1
-let g:Tlist_WinWidth=25
-let g:Tlist_Enable_Fold_Column=0
-let g:Tlist_Auto_Highlight_Tag=1
-let g:Tlist_Auto_Open=1
-let g:Tlist_Use_Right_Window=0
-let g:Tlist_File_Fold_Auto_Close = 1
-
-nmap  <F2> :TlistToggle<cr>
-
-set   tags=tags;
-
-set   updatetime=1000
-set   autoindent
-set   autoread
-set   autowrite
-set   background=dark
-set   backspace=indent,eol,start
-set   nobackup
-set   cindent
-set   cinoptions=:0
-set   completeopt=longest,menuone
-
-set   cursorline
-highlight CursorLine cterm=NONE ctermbg=black ctermfg=NONE guibg=NONE guifg=NONE
-" set   cursorcolumn
+syntax on
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=DarkBlue ctermfg=white guibg=NONE guifg=NONE
+" set cursorcolumn
 " highlight CursorColumn cterm=NONE ctermbg=black ctermfg=green guibg=NONE guifg=NONE
+set hlsearch
+highlight Search cterm=inverse,bold ctermfg=3 ctermbg=Black
+set number
+set ruler
 
-set   encoding=utf-8
-set   fileencodings=utf-8,gb2312,gbk,gb18030,chinese
-set   fileformat=unix
-set   foldenable
-set   foldmethod=marker
-set   helpheight=10
-set   helplang=cn
-set   hidden
-set   history=100
-set   hlsearch
-set   ignorecase
-set   incsearch
-set   mouse=
-set   number
-set   pumheight=10
-set   scrolloff=3
-set   shiftwidth=4
-set   showcmd
-set   smartindent
-set   smartcase
-set   tabstop=4
-set   expandtab
-set   termencoding=utf-8
-set   textwidth=200
-set   whichwrap=h,l
-set   wildignore=*.bak,*.o,*.e,*~
-set   wildmenu
-set   wildmode=list:longest,full
-set   nowrap
-set   autochdir
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8,gb2312,gbk,gb18030,chinese
+set fileformat=unix
 
-set laststatus=2      " always show status line
-" set ruler
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
-" get current path and translate $HOME to ~
-function! CurDir()
-    let curdir = substitute(getcwd(), $HOME, "~", "g")
-    return curdir
-endfunction
-set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
-" \ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}
-" \ \|\ %{$USER}\ @\ %{hostname()}\
+set scrolloff=3
+set mouse=
+
+set smartindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set autoindent
+set cindent
+set expandtab
+
+set textwidth=80
+set updatetime=1000
+set backspace=indent,eol,start
+set history=100
+set whichwrap=h,l
+set wildignore=*.bak,*.o,*.e,*~
+set wildmenu
+set wildmode=list:longest,full
+set showcmd
+set ignorecase
+set incsearch
+set autochdir
+set nobackup
+set autoread
+set autowrite
+set background=dark
+
+set cinoptions=:0
+set completeopt=longest,menuone
+set foldenable
+set foldmethod=marker
+set helpheight=10
+set helplang=cn
+set hidden
+set pumheight=10
+set smartcase
+set nowrap
+" ******************* vi system config end **************************
+
+" ******************* Custom Settings Begin *************************
 
 :inoremap [ []<Esc>i
 :inoremap { {}<Esc>i
@@ -198,7 +257,7 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :nnoremap w= :vertical resize +30<CR>
 :nnoremap w- :vertical resize -30<CR>
 
-"split navigations
+"split navigation
 :nnoremap <C-J> <C-W><C-J>
 :nnoremap <C-K> <C-W><C-K>
 :nnoremap <C-L> <C-W><C-L>
@@ -207,50 +266,6 @@ set statusline=[%n]\ %f%m%r%h\ \|\ \pwd:\ %{CurDir()}\ \|%=\|\ %l,%c\ %p%%\ \|
 :vmap <C-c> "+y
 :nmap <C-p> "+p
 :map <C-a> <Esc>ggVG
-
-"
-"""""""""""""""""""""""cscope configuration""""""""""""""""""
-" set cscopequickfix=s-,c-,d-,i-,t-,e-if has("cscope")  
-if has("cscope")    
-"    set csprg=/usr/bin/cscope  
-"    set csto=0  
-"    set cst  
-"    set csverb  
-"    set cspc=3  
-    "add any database in current dir  
-    if filereadable("cscope.out")  
-        cs add cscope.out  
-    "else search cscope.out elsewhere  
-    else  
-       let cscope_file=findfile("cscope.out", ".;")  
-       let cscope_pre=matchstr(cscope_file, ".*/")  
-       if !empty(cscope_file) && filereadable(cscope_file)  
-           exe "cs add" cscope_file cscope_pre  
-       endif        
-     endif  
-endif
-
-" ts
-:nmap f <C-]>
-:nmap tn <C-t>
-:nmap ts :ts <C-R>=expand("<cword>")<CR><CR>
-" cscope keys map
-:let mapleader='.'
-" :nmap <leader>sa:cs add cscope.out<cr>
-:nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-:nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-:nmap <leader>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
-:nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-" :nmap <leader>s :cs find s <C-R><C-W><CR>
-
-" python code dictionary
-filetype plugin on
-let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
 
 " set match colors
 :hi blue ctermfg=0 ctermbg=6 guifg=Black guibg=#8CCBEA
@@ -264,3 +279,4 @@ let g:pydiction_location='~/.vim/after/ftplugin/pydiction/complete-dict'
 :nmap cb :mat<CR>
 :nmap cg :2mat<CR>
 :nmap cr :3mat<CR>
+" ******************* Custom Settings End ***************************
