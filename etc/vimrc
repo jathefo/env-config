@@ -101,8 +101,8 @@ function! CurDir()
     let curdir = substitute(getcwd(), $HOME, "~", "g")
     return curdir
 endfunction
-set statusline+=%1*\ \pwd:%1.80{CurDir()}\ \|
-set statusline=%2*\|\ %t%m%r%h\ \|
+set statusline=%1*\|\ %t%m%r%h\ \|
+set statusline+=%2*\ \pwd:%1.80{CurDir()}\ \|
 set statusline+=%3*\ %=\|
 set statusline+=%4*\ %l,%c\ %p%%\ %L\|
 hi User1 cterm=inverse,bold ctermfg=Brown ctermbg=Black
