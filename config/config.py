@@ -40,3 +40,14 @@ if(not os.path.exists(homePath + os.sep + "/.vimrc")):
     sp.call(["ln","-s", envPath + "/etc/vimrc", homePath + "/.vimrc"])
 
 sp.call([". " + homePath + os.sep + ".bashrc"], shell=True)
+
+# config inputrc
+if(not os.path.exists(homePath + os.sep + '.inputrc')):
+    sp.call('echo "set completion-ignore-case on" > ~/.inputrc', shell=True)
+else:
+    sp.call('echo "set completion-ignore-case on" >> ~/.inputrc', shell=True)
+
+# config vim-plug tool
+sp.call(['wget plug.vim \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P \
+    ~/.vim/autoload'], shell=True)

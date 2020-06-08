@@ -1,56 +1,19 @@
-" ********************** vim bundle(vundle) begin ********************
+" ********************** vim plug configure begin ********************
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
 " ++++++++++ add your plugins as below ++++++++++
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('%HOME%/.vim/')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-"  " The following are examples of different formats supported.
-"  " Keep Plugin commands between vundle#begin/end.
-"  " plugin on GitHub repo
-"  Plugin 'tpope/vim-fugitive'
-"  " plugin from http://vim-scripts.org/vim/scripts.html
-"  " Plugin 'L9'
-"  " Git plugin not hosted on GitHub
-"  Plugin 'git://git.wincent.com/command-t.git'
-"  " git repos on your local machine (i.e. when working on your own plugin)
-"  Plugin 'file:///home/gmarik/path/to/plugin'
-"  " The sparkup vim script is in a subdirectory of this repo called vim.
-"  " Pass the path to set the runtimepath properly.
-"  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"  " Install L9 and avoid a Naming conflict if you've already installed a
-"  " different version somewhere else.
-"  " Plugin 'ascenator/L9', {'name': 'newL9'}
-
-Plugin 'jathefo/taglist.vim'
-" Plugin 'jathefo/cscope.vim'
-" Plugin 'Valloric/YouCompleteMe'
-
-call vundle#end()            " required
+call plug#begin('$HOME/.vim/plugged')
+Plug 'jathefo/taglist.vim'
+call plug#end()
 " ++++++++++ add your plugins as above ++++++++++
 
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" :PlugStatus     - check status of plugins
+" :PlugInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
-" ********************** vim bundle(vundle) end *********************
+" ********************** vim plug configure end *********************
 
 " ******************** taglist configuration begin ******************
 " Configurations for taglist plugin. So you should install taglist plugin firstly.
@@ -62,7 +25,7 @@ let Tlist_Auto_Open = 1
 let Tlist_Auto_Update = 1
 let Tlist_Close_On_Select = 0
 let Tlist_Compact_Format = 1
-let Tlist_Ctags_Cmd = '/usr/bin/ctags'
+let Tlist_Ctags_Cmd = '~/env-config/bin/ctags'
 " Tlist_Display_Prototype       	Show prototypes and not tags in the taglist window.
 " Tlist_Display_Tag_Scope       	Show tag scope next to the tag name.
 " Tlist_Enable_Fold_Column	        Show the fold indicator column in the taglist window.
