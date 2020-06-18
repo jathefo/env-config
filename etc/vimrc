@@ -114,8 +114,8 @@ function! CurDir()
     let curdir = substitute(getcwd(), $HOME, "~", "g")
     return curdir
 endfunction
-set statusline=%1*\|\ %t%m%r%h\ \|
-set statusline+=%2*\ \pwd:%1.80{CurDir()}\ \|
+set statusline=%1*\ \|\ pwd:%1.80{CurDir()}\ \|
+set statusline+=%2*\ %t%m%r%h\ \|
 set statusline+=%3*\ %=\|
 set statusline+=%4*\ %l,%c\ %p%%\ %L\|
 hi User1 cterm=inverse,bold ctermfg=Brown ctermbg=Black
@@ -241,7 +241,7 @@ function! Optclose(char)
 endfunction
 
 :nnoremap v- :resize -3<CR>
-:nnoremap v+ :resize +3<CR>
+:nnoremap v= :resize +3<CR>
 :nnoremap w= :vertical resize +20<CR>
 :nnoremap w- :vertical resize -20<CR>
 
@@ -250,10 +250,13 @@ endfunction
 :nnoremap <C-K> <C-W><C-K>
 :nnoremap <C-L> <C-W><C-L>
 :nnoremap <C-H> <C-W><C-H>
+:nnoremap <C-T> <C-W><C-T>
+:nnoremap <C-B> <C-W><C-B>
+:nnoremap <C-P> <C-W><C-P>
 
-:vmap <C-c> "+y
-:nmap <C-p> "+p
-:map <C-a> <Esc>ggVG
+" :vmap <C-c> "+y
+" :nmap <C-p> "+p
+" :map <C-a> <Esc>ggVG
 " :nmap sv :source ~/.vimrc
 
 " set match colors
@@ -262,10 +265,10 @@ endfunction
 :hi red ctermfg=0 ctermbg=1 guifg=Black guibg=#FF7272
 :hi pink ctermfg=0 ctermbg=5 guifg=Black guibg=#FFB3FF
 
-:nmap mb :mat blue /<C-R><C-W>/<CR>
-:nmap mg :2mat green /<C-R><C-W>/<CR>
-:nmap mr :3mat red /<C-R><C-W>/<CR>
-:nmap cb :mat<CR>
-:nmap cg :2mat<CR>
-:nmap cr :3mat<CR>
+:nmap >b :mat blue /<C-R><C-W>/<CR>
+:nmap >g :2mat green /<C-R><C-W>/<CR>
+:nmap >r :3mat red /<C-R><C-W>/<CR>
+:nmap <b :mat<CR>
+:nmap <g :2mat<CR>
+:nmap <r :3mat<CR>
 " ******************* Custom Settings End ***************************
