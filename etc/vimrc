@@ -5,6 +5,7 @@ filetype off                  " required
 " ++++++++++ add your plugins as below ++++++++++
 call plug#begin('$HOME/.vim/plugged')
 Plug 'jathefo/taglist.vim'
+Plug 'rhysd/vim-clang-format'
 call plug#end()
 " ++++++++++ add your plugins as above ++++++++++
 
@@ -14,6 +15,7 @@ call plug#end()
 " :PlugClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 " ********************** vim plug configure end *********************
+
 
 " ******************** taglist configuration begin ******************
 " Configurations for taglist plugin. So you should install taglist plugin firstly.
@@ -48,8 +50,8 @@ let Tlist_WinWidth = 30
 
 " taglist command configuration
 set tags=tags;
-:nmap f <C-]>
-:nmap tn <C-t>
+:nmap mf <C-]>
+:nmap mr <C-t>
 :nmap ts :ts <C-R>=expand("<cword>")<CR><CR>
 
 " ******************** taglist configuration end ********************
@@ -92,6 +94,17 @@ endif
 :nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 " ******************* cscope configuration end **********************
+
+" ********************** vim clang format begin *********************
+" configurations of clang format
+let g:clang_format#command = 'clang-format'
+let g:clang_format#detect_style_file = 1
+
+" map
+:cmap mt ClangFormat<CR>
+:vmap mt :ClangFormat<CR>
+
+" ********************** vim clang format end ***********************
 
 " ***************** show status line begin ****************
 set laststatus=2      " always show status line
@@ -170,9 +183,9 @@ set scrolloff=3
 set mouse=
 
 set smartindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set autoindent
 set cindent
 set expandtab
@@ -209,14 +222,26 @@ set nowrap
 " ******************* Custom Settings Begin *************************
 
 :inoremap [ []<Esc>i
+:inoremap ] <C-R>=Optclose(']')<CR>
 :inoremap { {}<Esc>i
+:inoremap } <C-R>=Optclose('}')<CR>
 :inoremap ( ()<Esc>i
+:inoremap ) <C-R>=Optclose(')')<CR>
 :inoremap < <><Esc>i
+:inoremap > <C-R>=Optclose('>')<CR>
 :inoremap " ""<Esc>i
 :inoremap ' ''<Esc>i
 
-:nnoremap < :resize -3<CR>
-:nnoremap > :resize +3<CR>
+function! Optclose(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+
+:nnoremap v- :resize -3<CR>
+:nnoremap v+ :resize +3<CR>
 :nnoremap w= :vertical resize +20<CR>
 :nnoremap w- :vertical resize -20<CR>
 
@@ -229,6 +254,7 @@ set nowrap
 :vmap <C-c> "+y
 :nmap <C-p> "+p
 :map <C-a> <Esc>ggVG
+" :nmap sv :source ~/.vimrc
 
 " set match colors
 :hi blue ctermfg=0 ctermbg=6 guifg=Black guibg=#8CCBEA
